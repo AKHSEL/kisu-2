@@ -70,10 +70,10 @@ export const postProduct = async (req: Request,res:Response)=>{
             msg: 'Agregado de manera exitosa'
         })
     } catch (error) {
-        console.log(error);
-        res.json({
-            msg: 'ErrorHorror'
-        })
+        console.error(error);
+        res.status(500).json({
+            msg: 'Error al eliminar el producto'
+        });
     }
 }
 

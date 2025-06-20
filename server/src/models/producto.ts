@@ -4,7 +4,8 @@ import db from '../db/connection'
 const Producto = db.define('Producto', {
     id_productos:{
         type: DataTypes.INTEGER,
-        primaryKey: true // <-- esto es lo que falta
+        primaryKey: true,
+        autoIncrement: true // <-- esto es lo que falta
 
     },
     codigo_productos:{

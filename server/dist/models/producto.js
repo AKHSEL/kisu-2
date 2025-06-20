@@ -8,7 +8,8 @@ const connection_1 = __importDefault(require("../db/connection"));
 const Producto = connection_1.default.define('Producto', {
     id_productos: {
         type: sequelize_1.DataTypes.INTEGER,
-        primaryKey: true // <-- esto es lo que falta
+        primaryKey: true,
+        autoIncrement: true // <-- esto es lo que falta
     },
     codigo_productos: {
         type: sequelize_1.DataTypes.INTEGER

@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Product } from '../../interfaces/product';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../../services/product.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-edit-product',
@@ -14,9 +15,12 @@ import { ProductService } from '../../services/product.service';
 })
 export class AddEditProductComponent {
   form: FormGroup;
+  loading: boolean = false;
 
   constructor(private fb: FormBuilder,
-    private _productService: ProductService
+    private _productService: ProductService,
+    private router: Router,
+    private toastr: ToastrService
   ){
     this.form = this.fb.group({
       code:[null, Validators.required],
@@ -30,16 +34,19 @@ export class AddEditProductComponent {
   }
   addProduct(){
     const product:Product = {
-      name: this.form.value.name,
-      code: this.form.value.code,
-      description: this.form.value.desc,
-      stock: this.form.value.cantidad,
-      precioV: this.form.value.pV,
-      precioC: this.form.value.pC,
-      marca: this.form.value.Marca
+      nombre_productos: this.form.value.name,
+      codigo_productos: this.form.value.code,
+      descp_productos: this.form.value.desc,
+      stock_productos: this.form.value.cantidad,
+      precio_venta: this.form.value.pV,
+      precio_compra: this.form.value.pC,
+      marca_productos: this.form.value.Marca
     }
+    this.loading = true;
     this._productService.saveProduct(product).subscribe(()=>{
-      console.log('producto agregado')
+      this.loading = false;
+      this.toastr.success(`El producto ${product.nombre_productos} fue registrado con éxito`, 'Producto registrado');
+      this.router.navigate(['/']);
     })
     }
     

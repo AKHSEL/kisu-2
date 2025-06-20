@@ -1,5 +1,5 @@
 <app-progress-bar *ngIf="loading"></app-progress-bar>
-<div *ngIf="!loading" class="container">
+<div  class="container">
     <h4>Listado de Productos 🐼</h4>
     <table *ngIf="listProduct.length > 0 " class="table table-hover">
   <thead>
@@ -17,18 +17,18 @@
   </thead>
   <tbody>
     <tr *ngFor="let item of listProduct" class="table-active">
-      <td></td>
-      <td></td>
-      <td></td>
-      <td> </td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td>{{item.id_productos}}</td>
+      <td>{{item.codigo_productos}}</td>
+      <td>{{item.nombre_productos}}</td>
+      <td>{{item.descp_productos}}</td>
+      <td>{{item.stock_productos}}</td>
+      <td>{{item.precio_compra}}</td>
+      <td>{{item.precio_venta}}</td>
+      <td>{{item.marca_productos}}</td>
 
       <td>
-        <button routerLink="/edit/{{ item.id }}" type="button" class="btn btn-primary btn-sm">Editar</button>
-        <button (click)="deleteProduct(item.id!)" type="button" class="btn btn-primary btn-sm">Delete</button>
+        <button routerLink="/edit/{{ item.id_productos }}" type="button" class="btn btn-primary btn-sm">Editar</button>
+        <button (click)="deleteProduct(item.id_productos!)" type="button" class="btn btn-primary btn-sm">Delete</button>
       </td>
     </tr>
   </tbody>
