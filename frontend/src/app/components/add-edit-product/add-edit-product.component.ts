@@ -5,6 +5,8 @@ import { Product } from '../../interfaces/product';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../../services/product.service';
 import { ToastrService } from 'ngx-toastr';
+import {MatDialog} from '@angular/material/dialog'
+import {AdModalComponent} from '../../shared/ad-modal/ad-modal.component'
 
 @Component({
   selector: 'app-add-edit-product',
@@ -23,7 +25,8 @@ export class AddEditProductComponent {
     private _productService: ProductService,
     private router: Router,
     private toastr: ToastrService,
-    private aRouter: ActivatedRoute
+    private aRouter: ActivatedRoute,
+    private dialog: MatDialog
   ){
     this.form = this.fb.group({
       code:[null, Validators.required],
@@ -59,7 +62,17 @@ export class AddEditProductComponent {
       })
     })
   }
+confirmarGuardar() {
+  const dialogRef = this.dialog.open(AdModalComponent, {
+    data: { mensaje: '¿Estás seguro de guardar este producto?' }
+  });
 
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      this.addProduct();
+    }
+  });
+}
   addProduct(){
     const product:Product = {
       nombre_productos: this.form.value.name,
