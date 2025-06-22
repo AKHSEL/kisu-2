@@ -15,6 +15,9 @@ export class AdModalComponent {
     public dialogRef: MatDialogRef<AdModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {mensaje: string}
   ){}
+
+   
+  
   onConfirm():void {
     this.dialogRef.close(true);
   }

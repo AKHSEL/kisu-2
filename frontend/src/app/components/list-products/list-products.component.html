@@ -1,6 +1,6 @@
 <app-progress-bar *ngIf="loading"></app-progress-bar>
 <div  class="container">
-    <h4>Listado de Productos 🐼</h4>
+    <h1 class=" text-center m-3">Listado de Productos 🐼</h1>
     <table *ngIf="listProduct.length > 0 " class="table table-hover">
   <thead>
     <tr class="table-active">
@@ -27,8 +27,9 @@
       <td>{{item.marca_productos}}</td>
 
       <td>
-        <button routerLink="/edit/{{ item.id_productos }}" type="button" class="btn btn-primary btn-sm">Editar</button>
-        <button (click)="deleteProduct(item.id_productos!)" type="button" class="btn btn-primary btn-sm">Delete</button>
+        <button routerLink="/edit/{{ item.id_productos }}" type="button" class="btn btn-primary btn-sm p-2 mr-1 ">Editar</button>
+        <button (click)="confirmarEliminar(item.id_productos!)" type="button" class="btn btn-primary btn-sm p-2">Eliminar</button>
+        
       </td>
     </tr>
   </tbody>

@@ -7,11 +7,15 @@ import { ProductService } from '../../services/product.service';
 import { ToastrService } from 'ngx-toastr';
 import {MatDialog} from '@angular/material/dialog'
 import {AdModalComponent} from '../../shared/ad-modal/ad-modal.component'
+import {MatIconModule} from '@angular/material/icon';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatButtonModule} from '@angular/material/button';
+
 
 @Component({
   selector: 'app-add-edit-product',
   standalone: true,
-  imports: [RouterModule,ReactiveFormsModule,CommonModule],
+  imports: [RouterModule,ReactiveFormsModule,CommonModule,MatButtonModule, MatDividerModule,MatIconModule],
   templateUrl: './add-edit-product.component.html',
   styleUrl: './add-edit-product.component.css'
 })
@@ -64,7 +68,7 @@ export class AddEditProductComponent {
   }
 confirmarGuardar() {
   const dialogRef = this.dialog.open(AdModalComponent, {
-    data: { mensaje: '¿Estás seguro de guardar este producto?' }
+    data: { mensaje: `'¿Estás seguro de ${this.operacion.toLocaleLowerCase()} este producto?'` }
   });
 
   dialogRef.afterClosed().subscribe(result => {
@@ -73,6 +77,8 @@ confirmarGuardar() {
     }
   });
 }
+
+
   addProduct(){
     const product:Product = {
       nombre_productos: this.form.value.name,
@@ -84,8 +90,9 @@ confirmarGuardar() {
       marca_productos: this.form.value.Marca
     }
 
-    if (this.id !== 0) {
       this.loading = true;
+
+    if (this.id !== 0) {
       product.id_productos = this.id;
       this._productService.updateProduct(this.id, product).subscribe(()=>{
         this.loading = false;
