@@ -7,12 +7,13 @@ import { ProgressBarComponent } from '../../shared/progress-bar/progress-bar.com
 import { ToastrService } from 'ngx-toastr';
 import {MatDialog} from '@angular/material/dialog'
 import {AdModalComponent} from '../../shared/ad-modal/ad-modal.component'
+import { MatIcon } from '@angular/material/icon';
 
 
 @Component({
   selector: 'app-list-products',
   standalone: true,
-  imports: [RouterModule, ProgressBarComponent, CommonModule],
+  imports: [RouterModule, ProgressBarComponent, CommonModule,MatIcon],
   templateUrl: './list-products.component.html',
   styleUrl: './list-products.component.css'
 })

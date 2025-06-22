@@ -29,9 +29,9 @@
       <td>S/. {{item.precio_venta | number:'1.2-2'}}</td>
       <td>{{item.marca_productos}}</td>
 
-      <td class="d-flex flex-colum flex-md-row justify-content-center gap-1">
-        <button routerLink="/edit/{{ item.id_productos }}" type="button" class="btn btn-sm btn-primary w-100 w-md-auto mr-2">Editar</button>
-        <button (click)="confirmarEliminar(item.id_productos!)" type="button" class="btn btn-sm btn-danger w-100 w-md-auto">Eliminar</button>
+      <td class="d-flex flex-colum flex-md-row justify-content-center gap-2">
+        <button routerLink="/edit/{{ item.id_productos }}" type="button" class="btn btn-sm btn-primary w-100 w-md-auto d-flex align-items-center justify-content-center gap-1" > <mat-icon>edit</mat-icon> EDITAR</button>
+        <button (click)="confirmarEliminar(item.id_productos!)" type="button" class="btn btn-sm btn-danger w-100 w-md-auto d-flex align-items-center justify-content-center gap-1"><mat-icon>delete</mat-icon> Eliminar</button>
         
       </td>
     </tr>
