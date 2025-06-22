@@ -1,43 +1,72 @@
-<div class="row mt-1">
-    <div class="col-lg-4 offset-lg-4">
-        <div class="card text-white bg-secondary mb-3" style="max-width: max-content;">
-        <div class="card-header text-center">{{operacion}} Producto</div>
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8">
+      <div class="card shadow border-0">
+        <div class="card-header text-center bg-primary text-white fw-semibold fs-5">
+          {{ operacion }} Producto 🐼
+        </div>
         <div class="card-body">
-        <form [formGroup]="form" (ngSubmit)="confirmarGuardar()">
-  <div class="row g-3">
+          <form [formGroup]="form" (ngSubmit)="confirmarGuardar()">
+            <div class="row g-3">
 
-    <div class="col-md-6">
-      <input formControlName="code" type="text" class="form-control" placeholder="Ingrese código">
-      <span *ngIf="form.get('code')?.hasError('required')  && form.get('code')?.touched">El campo es <strong>requerido</strong></span>
-      <input formControlName="name" type="text" class="form-control mt-2" placeholder="Ingrese nombre">
-        <span *ngIf="form.get('name')?.hasError('required') && form.get('name')?.touched">El campo es <strong>requerido</strong></span>
-      <input formControlName="desc" type="text" class="form-control mt-2" placeholder="Ingrese descripción">
-      <span *ngIf="form.get('desc')?.hasError('required') && form.get('desc')?.touched">El campo es <strong>requerido</strong></span>
-      <input formControlName="cantidad" type="text" class="form-control mt-2" placeholder="Ingrese cantidad">
-      <span *ngIf="form.get('cantidad')?.hasError('required') && form.get('cantidad')?.touched">El campo es <strong>requerido</strong></span>
-    </div>
+              <!-- Primera columna -->
+              <div class="col-md-6">
+                <input formControlName="code" type="text" class="form-control" placeholder="Código">
+                <small class="text-danger" *ngIf="form.get('code')?.hasError('required') && form.get('code')?.touched">
+                  El campo es requerido
+                </small>
 
-    <div class="col-md-6">
-      <input formControlName="pV" type="text" class="form-control" placeholder="Ingrese Precio Venta">
-      <span *ngIf="form.get('pV')?.hasError('required') && form.get('pV')?.touched">El campo es <strong>requerido</strong></span>
-      <input formControlName="pC" type="text" class="form-control mt-2" placeholder="Ingrese Precio Compra">
-      <span *ngIf="form.get('pC')?.hasError('required') && form.get('pC')?.touched">El campo es <strong>requerido</strong></span>
-      <input formControlName="Marca" type="text" class="form-control mt-2" placeholder="Ingrese Marca">
-      <span *ngIf="form.get('Marca')?.hasError('required') && form.get('Marca')?.touched">El campo es <strong>requerido</strong></span>
-    </div>
-    <div class="row mt-2 text-center">
-        <div class="col-lg-6">
-            <button routerLink="/" type="button" class="btn btn-primary">Volver</button>
+                <input formControlName="name" type="text" class="form-control mt-3" placeholder="Nombre">
+                <small class="text-danger" *ngIf="form.get('name')?.hasError('required') && form.get('name')?.touched">
+                  El campo es requerido
+                </small>
+
+                <input formControlName="desc" type="text" class="form-control mt-3" placeholder="Descripción">
+                <small class="text-danger" *ngIf="form.get('desc')?.hasError('required') && form.get('desc')?.touched">
+                  El campo es requerido
+                </small>
+
+                <input formControlName="cantidad" type="number" class="form-control mt-3" placeholder="Cantidad">
+                <small class="text-danger" *ngIf="form.get('cantidad')?.hasError('required') && form.get('cantidad')?.touched">
+                  El campo es requerido
+                </small>
+              </div>
+
+              <!-- Segunda columna -->
+              <div class="col-md-6">
+                <input formControlName="pV" type="number" class="form-control" placeholder="Precio Venta">
+                <small class="text-danger" *ngIf="form.get('pV')?.hasError('required') && form.get('pV')?.touched">
+                  El campo es requerido
+                </small>
+
+                <input formControlName="pC" type="number" class="form-control mt-3" placeholder="Precio Compra">
+                <small class="text-danger" *ngIf="form.get('pC')?.hasError('required') && form.get('pC')?.touched">
+                  El campo es requerido
+                </small>
+
+                <input formControlName="Marca" type="text" class="form-control mt-3" placeholder="Marca">
+                <small class="text-danger" *ngIf="form.get('Marca')?.hasError('required') && form.get('Marca')?.touched">
+                  El campo es requerido
+                </small>
+              </div>
+            </div>
+
+            <!-- Botones -->
+            <div class="row mt-4 text-center">
+              <div class="col-md-6 mb-2 mb-md-0">
+                <button routerLink="/" type="button" class="btn btn-outline-secondary w-100">← Volver</button>
+              </div>
+              <div class="col-md-6">
+                <button [disabled]="form.invalid" type="submit" class="btn btn-success w-100">
+                  {{ operacion === 'Editar' ? 'Actualizar' : 'Guardar' }}
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
-        <div class="col-lg-6">
-            <button [disabled]="form.invalid" type="submit" class="btn btn-info">Aceptar</button>
-        </div>
+      </div>
     </div>
   </div>
-</form>
+</div>
 
-    </div>
-</div>
-    </div>
-</div>
 

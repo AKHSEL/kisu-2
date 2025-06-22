@@ -1,8 +1,11 @@
 <app-progress-bar *ngIf="loading"></app-progress-bar>
-<div  class="container">
-    <h1 class=" text-center m-3">Listado de Productos 🐼</h1>
-    <table *ngIf="listProduct.length > 0 " class="table table-hover">
-  <thead>
+<div  class="container py-4">
+    <h1 class=" text-center mb-4">Listado de Productos 🐼</h1>
+    
+    <!--Tabla-->
+    <div class="table-responsive">
+      <table *ngIf="listProduct.length > 0 " class="table table-hover table-bordered align-middle shadow-sm rounded">
+  <thead class="table-dark text-center">
     <tr class="table-active">
       <th scope="col">Item</th>
       <th scope="col">Codigo</th>
@@ -12,27 +15,29 @@
       <th scope="col">Precio Compra</th>
       <th scope="col">Precio Venta</th>
       <th scope="col"> Marca</th>
-      <th scope="col"></th>
+      <th scope="col">Acciones</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of listProduct" class="table-active">
+    <tr *ngFor="let item of listProduct" class="text-center">
       <td>{{item.id_productos}}</td>
       <td>{{item.codigo_productos}}</td>
       <td>{{item.nombre_productos}}</td>
       <td>{{item.descp_productos}}</td>
       <td>{{item.stock_productos}}</td>
-      <td>{{item.precio_compra}}</td>
-      <td>{{item.precio_venta}}</td>
+      <td>S/. {{item.precio_compra | number:'1.2-2'}}</td>
+      <td>S/. {{item.precio_venta | number:'1.2-2'}}</td>
       <td>{{item.marca_productos}}</td>
 
-      <td>
-        <button routerLink="/edit/{{ item.id_productos }}" type="button" class="btn btn-primary btn-sm p-2 mr-1 ">Editar</button>
-        <button (click)="confirmarEliminar(item.id_productos!)" type="button" class="btn btn-primary btn-sm p-2">Eliminar</button>
+      <td class="d-flex flex-colum flex-md-row justify-content-center gap-1">
+        <button routerLink="/edit/{{ item.id_productos }}" type="button" class="btn btn-sm btn-primary w-100 w-md-auto mr-2">Editar</button>
+        <button (click)="confirmarEliminar(item.id_productos!)" type="button" class="btn btn-sm btn-danger w-100 w-md-auto">Eliminar</button>
         
       </td>
     </tr>
   </tbody>
 </table>
-<h5 *ngIf="listProduct.length ==0" >No hay productos para Mostrar</h5>
+    </div>
+    
+<h5 *ngIf="listProduct.length ==0" class="text-muted" >No hay productos para Mostrar</h5>
 </div>

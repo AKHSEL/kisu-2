@@ -1,20 +1,27 @@
-<nav class="navbar navbar-expand-lg bg-light" data-bs-theme="light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">KISU IMPORTACIONES</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+    <a class="navbar-brand fw-bold text-primary" href="#">KISU IMPORTACIONES</a>
+
+    <button class="navbar-toggler"
+        type="button"
+        (click)="isMenuOpen = !isMenuOpen"
+        [attr.aria-expanded]="isMenuOpen"
+        aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarColor03">
-      <ul class="navbar-nav me-auto">
+
+    <div class="collapse navbar-collapse" [class.show]="isMenuOpen" id="navbarKisu">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" href="/agregar" >AGREGAR</a>
+          <a class="nav-link active" routerLinkActive="active" (click)="isMenuOpen = false" href="/agregar" >AGREGAR</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">LISTAR</a>
+          <a class="nav-link" routerLinkActive="active" (click)="isMenuOpen = false" href="#">LISTAR</a>
         </li>
-        <form class="d-flex">
-        <input class="form-control me-sm-2" type="search" placeholder="Search">
-        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+
+        <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Buscar producto...">
+        <button class="btn btn-outline-secondary ml-2" type="submit">Search</button>
       </form>
       </ul>
     </div>
