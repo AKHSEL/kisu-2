@@ -18,10 +18,15 @@
         <li class="nav-item">
           <a class="nav-link"   href="#">LISTAR</a>
         </li>
-
-        <form class="d-flex" role="search">
+<!--
+        <form *ngFor="let item of listProduct" class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Buscar producto...">
-        <button class="btn btn-outline-secondary ml-2" type="submit">Search</button>
+        <button routerLink="/edit/{{ item.id_productos }}" class="btn btn-outline-secondary  ml-2" type="button">Search</button>
+        </form>
+-->
+        <form  class="d-flex" role="search" (submit)="buscarproducto()">
+        <input class="form-control me-2" type="search" placeholder="Buscar producto..." [(ngModel)]="busqueda" name="busqueda" required>
+        <button  class="btn btn-outline-secondary  ml-2" type="submit">Search</button>
       </form>
       </ul>
     </div>
