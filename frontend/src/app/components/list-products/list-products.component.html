@@ -1,22 +1,23 @@
 <app-progress-bar *ngIf="loading"></app-progress-bar>
+
 <div  class="container py-4">
-    <h1 class=" text-center mb-4">Listado de Productos 🐼</h1>
+  <h1 class=" text-center mb-4">Listado de Productos 🐼</h1>
     
     <!--Tabla-->
-    <div class="table-responsive">
-      <table *ngIf="listProduct.length > 0 " class="table table-hover table-bordered align-middle shadow-sm rounded">
-  <thead class="table-dark text-center">
-    <tr class="table-active">
-      <th scope="col">Item</th>
-      <th scope="col">Codigo</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Descripcion</th>
-      <th scope="col">Cantidad</th>
-      <th scope="col">Precio Compra</th>
-      <th scope="col">Precio Venta</th>
-      <th scope="col"> Marca</th>
-      <th scope="col">Acciones</th>
-    </tr>
+  <div class="table-responsive">
+    <table *ngIf="listProduct.length > 0 " class="table table-hover table-bordered align-middle shadow-sm rounded">
+      <thead class="table-dark text-center">
+        <tr class="table-active">
+          <th scope="col">Item</th>
+          <th scope="col">Codigo</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Descripcion</th>
+          <th scope="col">Cantidad</th>
+          <th scope="col">Precio Compra</th>
+          <th scope="col">Precio Venta</th>
+          <th scope="col"> Marca</th>
+          <th scope="col">Acciones</th>
+        </tr>
   </thead>
   <tbody>
     <tr *ngFor="let item of listProduct" class="text-center">
@@ -28,16 +29,27 @@
       <td>S/. {{item.precio_compra | number:'1.2-2'}}</td>
       <td>S/. {{item.precio_venta | number:'1.2-2'}}</td>
       <td>{{item.marca_productos}}</td>
-
       <td class="d-flex flex-colum flex-md-row justify-content-center gap-2">
-        <button routerLink="/edit/{{ item.id_productos }}" type="button" class="btn btn-sm btn-primary w-100 w-md-auto d-flex align-items-center justify-content-center gap-1" > <mat-icon>edit</mat-icon> EDITAR</button>
-        <button (click)="confirmarEliminar(item.id_productos!)" type="button" class="btn btn-sm btn-danger w-100 w-md-auto d-flex align-items-center justify-content-center gap-1"><mat-icon>delete</mat-icon> Eliminar</button>
-        
+        <button 
+          routerLink="/edit/{{ item.id_productos }}" 
+          type="button" 
+          class="btn btn-sm btn-primary w-100 w-md-auto d-flex align-items-center justify-content-center gap-1" 
+          >
+           <mat-icon>edit</mat-icon> Eliminar
+        </button>
+        <button 
+          (click)="confirmarEliminar(item.id_productos!)" 
+          type="button" 
+          class="btn btn-sm btn-danger w-100 w-md-auto d-flex align-items-center justify-content-center gap-1"
+          >
+            <mat-icon>delete</mat-icon> Eliminar
+        </button>
       </td>
     </tr>
   </tbody>
 </table>
-    </div>
+</div>
     
 <h5 *ngIf="listProduct.length ==0" class="text-muted" >No hay productos para Mostrar</h5>
+
 </div>

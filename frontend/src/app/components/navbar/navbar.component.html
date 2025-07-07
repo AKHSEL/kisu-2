@@ -7,7 +7,7 @@
         (click)="isMenuOpen = !isMenuOpen"
         [attr.aria-expanded]="isMenuOpen"
         aria-label="Toggle navigation">
-  <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" [class.show]="isMenuOpen" id="navbarKisu">
@@ -18,17 +18,19 @@
         <li class="nav-item">
           <a class="nav-link"   href="#">LISTAR</a>
         </li>
-<!--
-        <form *ngFor="let item of listProduct" class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Buscar producto...">
-        <button routerLink="/edit/{{ item.id_productos }}" class="btn btn-outline-secondary  ml-2" type="button">Search</button>
-        </form>
--->
-        <form  class="d-flex" role="search" (submit)="buscarproducto()">
-        <input class="form-control me-2" type="search" placeholder="Buscar producto..." [(ngModel)]="busqueda" name="busqueda" required>
-        <button  class="btn btn-outline-secondary  ml-2" type="submit">Search</button>
-      </form>
       </ul>
+
+      <form  class="d-flex" role="search" (submit)="buscarproducto()">
+        <input 
+          class="form-control me-2" 
+          type="search" 
+          placeholder="Buscar producto..." 
+          [(ngModel)]="busqueda" 
+          name="busqueda" 
+          required
+        >
+        <button  class="btn btn-outline-secondary  ml-2" type="submit">Buscar</button>
+      </form>
     </div>
   </div>
 </nav>

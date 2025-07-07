@@ -15,7 +15,14 @@ import {MatButtonModule} from '@angular/material/button';
 @Component({
   selector: 'app-add-edit-product',
   standalone: true,
-  imports: [RouterModule,ReactiveFormsModule,CommonModule,MatButtonModule, MatDividerModule,MatIconModule],
+  imports: [
+    RouterModule,
+    ReactiveFormsModule,
+    CommonModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatIconModule
+  ],
   templateUrl: './add-edit-product.component.html',
   styleUrl: './add-edit-product.component.css'
 })
@@ -25,13 +32,24 @@ export class AddEditProductComponent {
   id: number;
   operacion: string = 'Agregar'
 
-  constructor(private fb: FormBuilder,
+  formFields = [
+    { name: 'code', label: 'Código', type: 'text', col: 6 },
+    { name: 'name', label: 'Nombre', type: 'text', col: 6 },
+    { name: 'desc', label: 'Descripción', type: 'text', col: 6 },
+    { name: 'cantidad', label: 'Cantidad', type: 'number', col: 6 },
+    { name: 'pV', label: 'Precio Venta', type: 'number', col: 6 },
+    { name: 'pC', label: 'Precio Compra', type: 'number', col: 6 },
+    { name: 'marca', label: 'Marca', type: 'text', col: 6 },
+  ];
+
+  constructor(
+    private fb: FormBuilder,
     private _productService: ProductService,
     private router: Router,
     private toastr: ToastrService,
     private aRouter: ActivatedRoute,
     private dialog: MatDialog
-  ){
+  ) {
     this.form = this.fb.group({
       code:[null, Validators.required],
       name:['', Validators.required],
@@ -40,20 +58,21 @@ export class AddEditProductComponent {
       pV:[null, Validators.required],
       pC:[null, Validators.required],
       Marca:['', Validators.required]
-    })
-    this.id = Number(aRouter.snapshot.paramMap.get('id') );
+    });
+
+    this.id = Number(aRouter.snapshot.paramMap.get('id'));
   }
 
-  ngOnInit():void{
+  ngOnInit():void {
     if (this.id != 0) {
       this.operacion = 'Editar';
-      this.getProduct(this.id)
+      this.getProduct(this.id);
     }
   }
 
-  getProduct(id:number){
+  getProduct(id: number) {
     this.loading = true;
-    this._productService.getProduct(id).subscribe((data:Product)=>{
+    this._productService.getProduct(id).subscribe((data:Product) => {
       this.loading = false;
       this.form.setValue({
         code: data.codigo_productos,
@@ -63,12 +82,13 @@ export class AddEditProductComponent {
         pV: data.precio_venta,
         pC: data.precio_compra,
         Marca: data.marca_productos
-      })
-    })
+      });
+    });
   }
+
 confirmarGuardar() {
   const dialogRef = this.dialog.open(AdModalComponent, {
-    data: { mensaje: `'¿Estás seguro de ${this.operacion.toLocaleLowerCase()} este producto?'` }
+    data: { mensaje: `¿Estás seguro de ${this.operacion.toLocaleLowerCase()} este producto?` }
   });
 
   dialogRef.afterClosed().subscribe(result => {
@@ -80,7 +100,7 @@ confirmarGuardar() {
 
 
   addProduct(){
-    const product:Product = {
+    const product: Product = {
       nombre_productos: this.form.value.name,
       codigo_productos: this.form.value.code,
       descp_productos: this.form.value.desc,
@@ -88,28 +108,24 @@ confirmarGuardar() {
       precio_venta: this.form.value.pV,
       precio_compra: this.form.value.pC,
       marca_productos: this.form.value.Marca
-    }
+    };
 
-      this.loading = true;
+    this.loading = true;
 
     if (this.id !== 0) {
       product.id_productos = this.id;
-      this._productService.updateProduct(this.id, product).subscribe(()=>{
+      this._productService.updateProduct(this.id, product).subscribe(() => {
         this.loading = false;
         this.toastr.success(`El producto ${product.nombre_productos} fue actualizado con éxito`, 'Producto actualizado');
         this.router.navigate(['/']);
-      })
-    } else{
-      this.loading = true;
-    this._productService.saveProduct(product).subscribe(()=>{
+      });
+    } else {
+      this._productService.saveProduct(product).subscribe(()=>{
       this.loading = false;
       this.toastr.success(`El producto ${product.nombre_productos} fue registrado con éxito`, 'Producto registrado');
       this.router.navigate(['/']);
     })
+      }
     }
-
-    
-    }
-    
   }
 

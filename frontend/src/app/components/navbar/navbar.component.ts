@@ -9,7 +9,11 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterModule,CommonModule,FormsModule],
+  imports: [
+    RouterModule,
+    CommonModule,
+    FormsModule
+  ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
@@ -17,9 +21,11 @@ export class NavbarComponent {
   isMenuOpen = false;
     listProduct: Product [] = []
   busqueda: string = ''
-    constructor(private router: Router, private productService:ProductService,private toastr: ToastrService){
-
-    }
+    constructor(
+      private router: Router, 
+      private productService:ProductService,
+      private toastr: ToastrService) {}
+      
       ngOnInit(){
         this.productService.getListProducts().subscribe((data)=>{
           this.listProduct=data

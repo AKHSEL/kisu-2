@@ -13,48 +13,55 @@ import { MatIcon } from '@angular/material/icon';
 @Component({
   selector: 'app-list-products',
   standalone: true,
-  imports: [RouterModule, ProgressBarComponent, CommonModule,MatIcon],
+  imports: [
+    RouterModule, 
+    ProgressBarComponent, 
+    CommonModule,
+    MatIcon
+  ],
   templateUrl: './list-products.component.html',
   styleUrl: './list-products.component.css'
 })
 export class ListProductsComponent implements OnInit{
-  listProduct: Product [] = []
+  listProduct: Product [] = [];
   loading: boolean = false;
   
+  constructor(
+    private _productoService: ProductService,
+    private toastr: ToastrService, 
+    private dialog: MatDialog
+  ){}
 
-constructor(private _productoService: ProductService, private toastr: ToastrService, private dialog: MatDialog){
-  
-}
 ngOnInit(): void {
-this.getListProducts();
+  this.getListProducts();
 }
 
 getListProducts(){
-
   this.loading = true;
-     this._productoService.getListProducts().subscribe((data)=>{
+  this._productoService.getListProducts().subscribe((data)=>{
     this.listProduct = data;
     this.loading = false;
-  })
+  });
 }
+
 confirmarEliminar(id:number){
  const dialogRef = this.dialog.open(AdModalComponent, {
   data: { mensaje: '¿Estás seguro de eliminar el producto?' }
 });
+
 dialogRef.afterClosed().subscribe(result => {
   if (result) {
     this.deleteProduct(id);
   }
-});
-
+  });
 }
+
 deleteProduct(id:number){
   this.loading = true;
-  this._productoService.deleteProduct(id).subscribe(()=>{
+  this._productoService.deleteProduct(id).subscribe(() => {
     this.loading = false;
     this.getListProducts();
     this.toastr.warning('El producto fue eliminado correctamente', 'Producto eliminado')
-  })
-}
-
-}
+    })
+  }
+} 

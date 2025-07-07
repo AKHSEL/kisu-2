@@ -6,18 +6,20 @@ import {MatButtonModule} from '@angular/material/button'
 @Component({
   selector: 'app-ad-modal',
   standalone: true,
-  imports: [CommonModule, MatDialogModule, MatButtonModule],
+  imports: [CommonModule, 
+    MatDialogModule, 
+    MatButtonModule
+  ],
   templateUrl: './ad-modal.component.html',
   styleUrl: './ad-modal.component.css'
 })
+
 export class AdModalComponent {
   constructor(
     public dialogRef: MatDialogRef<AdModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {mensaje: string}
   ){}
 
-   
-  
   onConfirm():void {
     this.dialogRef.close(true);
   }
